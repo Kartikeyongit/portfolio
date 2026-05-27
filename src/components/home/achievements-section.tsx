@@ -26,7 +26,7 @@ const achievements = [
   },
   {
     icon: Code2,
-    title: '200+ DSA Problems Solved',
+    title: '250+ DSA Problems Solved',
     description: 'Active problem solver on LeetCode with consistent streak',
   },
   {
