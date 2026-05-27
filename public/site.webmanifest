@@ -1,0 +1,21 @@
+{
+  "name": "Your Name — Full Stack Developer",
+  "short_name": "Your Name",
+  "description": "Full-stack developer building production-grade applications. GATE CS Qualified.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
