@@ -34,8 +34,16 @@ export interface OtherProject {
   slug: string
   title: string
   tagline: string
+  description?: string
   thumbnail: string
   stack: string[]
+  category?: string
   githubUrl: string
   liveUrl?: string
+  highlights?: string[]
+  metrics?: {
+    label: string
+    value: string
+  }[]
+  status?: 'production' | 'development' | 'archived'
 }

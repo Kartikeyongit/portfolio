@@ -1,7 +1,7 @@
 // src/components/shared/typewriter-text.tsx
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
 interface TypewriterTextProps {
@@ -14,17 +14,18 @@ interface TypewriterTextProps {
 
 export function TypewriterText({
   words,
-  typeSpeed = 5,
-  deleteSpeed = 5,
-  pauseDuration = 2000,
+  typeSpeed = 80,
+  deleteSpeed = 40,
+  pauseDuration = 2500,
   className,
 }: TypewriterTextProps) {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [currentText, setCurrentText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-  const [isComplete, setIsComplete] = useState(false)
+  const [displayText, setDisplayText] = useState('')
   const [showCursor, setShowCursor] = useState(true)
+
+  const wordIndexRef = useRef(0)
+  const charIndexRef = useRef(0)
+  const isDeletingRef = useRef(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     const blinkInterval = setInterval(() => {
@@ -33,51 +34,47 @@ export function TypewriterText({
     return () => clearInterval(blinkInterval)
   }, [])
 
-  const type = useCallback(() => {
-    const fullWord = words[currentWordIndex]
-
-    if (isComplete) return
-
-    if (isPaused) return
-
-    if (!isDeleting) {
-      if (currentText.length < fullWord.length) {
-        setCurrentText(fullWord.substring(0, currentText.length + 1))
-      } else {
-        if (currentWordIndex === words.length - 1) {
-          setIsComplete(true)
-          return
+  useEffect(() => {
+    const tick = () => {
+      const fullWord = words[wordIndexRef.current]
+      if (isDeletingRef.current) {
+        if (charIndexRef.current > 0) {
+          charIndexRef.current--
+          setDisplayText(fullWord.substring(0, charIndexRef.current))
+          timeoutRef.current = setTimeout(tick, deleteSpeed)
+        } else {
+          isDeletingRef.current = false
+          wordIndexRef.current = (wordIndexRef.current + 1) % words.length
+          charIndexRef.current = 0
+          timeoutRef.current = setTimeout(tick, typeSpeed)
         }
-        setIsPaused(true)
-        setTimeout(() => {
-          setIsPaused(false)
-          setIsDeleting(true)
-        }, pauseDuration)
-      }
-    } else {
-      if (currentText.length > 0) {
-        setCurrentText(currentText.substring(0, currentText.length - 1))
       } else {
-        setIsDeleting(false)
-        setCurrentWordIndex((prev) => prev + 1)
+        if (charIndexRef.current < fullWord.length) {
+          charIndexRef.current++
+          setDisplayText(fullWord.substring(0, charIndexRef.current))
+          timeoutRef.current = setTimeout(tick, typeSpeed)
+        } else {
+          timeoutRef.current = setTimeout(() => {
+            isDeletingRef.current = true
+            timeoutRef.current = setTimeout(tick, deleteSpeed)
+          }, pauseDuration)
+        }
       }
     }
-  }, [currentWordIndex, currentText, isDeleting, isPaused, isComplete, words, pauseDuration])
 
-  useEffect(() => {
-    const speed = isDeleting ? deleteSpeed : typeSpeed
-    const timer = setTimeout(type, speed)
-    return () => clearTimeout(timer)
-  }, [type, isDeleting, typeSpeed, deleteSpeed])
+    timeoutRef.current = setTimeout(tick, typeSpeed)
+    return () => clearTimeout(timeoutRef.current)
+  }, [words, typeSpeed, deleteSpeed, pauseDuration])
 
   return (
     <span className={cn('inline', className)}>
-      {currentText}
+      {displayText}
       <span
-        className="inline-block w-[0.2em] h-[1em] ml-[2px] align-middle"
+        aria-hidden="true"
+        className="inline-block w-[0.2em] h-[1em] ml-[2px] align-middle rounded-sm"
         style={{
-          background: showCursor 
-            ? 'linear-gradient(to right, #6366f1, #8b5cf6)' 
+          background: showCursor
+            ? 'linear-gradient(to right, #6366f1, #8b5cf6)'
             : 'transparent',
           transition: 'background-color 0.1s',
         }}

@@ -8,7 +8,7 @@ import { Menu, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants'
+import { NAV_LINKS, SITE_CONFIG, scrollToSection } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -22,16 +22,6 @@ export function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const element = document.querySelector(href)
-    if (element) {
-      const offset = 80
-      const top = element.getBoundingClientRect().top + window.pageYOffset - offset
-      window.scrollTo({ top, behavior: 'smooth' })
-    }
-  }
 
   return (
     <motion.header

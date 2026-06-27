@@ -6,7 +6,7 @@ import { ArrowDown, Mail, FileText } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/shared/icons'
 import { Button } from '@/components/ui/button'
 import { GradientText } from '@/components/shared/gradient-text'
-import { SITE_CONFIG } from '@/lib/constants'
+import { SITE_CONFIG, scrollToSection } from '@/lib/constants'
 import { type Variants } from 'framer-motion'
 import { TypewriterText } from '@/components/shared/typewriter-text'
 
@@ -37,21 +37,12 @@ const item: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1], // cubic-bezier instead of string
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
 }
 
 export function Hero() {
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const element = document.querySelector(href)
-    if (element) {
-      const offset = 80
-      const top = element.getBoundingClientRect().top + window.pageYOffset - offset
-      window.scrollTo({ top, behavior: 'smooth' })
-    }
-  }
 
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-20 overflow-hidden">
@@ -75,7 +66,7 @@ export function Hero() {
         <motion.div variants={item}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/80 backdrop-blur-sm text-sm text-muted-foreground mb-8 shadow-sm">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400/50" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             </span>
             Open to opportunities

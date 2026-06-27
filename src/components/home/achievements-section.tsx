@@ -53,7 +53,7 @@ export function AchievementsSection() {
           />
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
           {achievements.map((achievement, index) => {
             const Icon = achievement.icon
             return (
@@ -62,7 +62,8 @@ export function AchievementsSection() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="group"
               >
                 <Card
                   className={`h-full transition-all duration-300 hover:shadow-lg ${
@@ -74,7 +75,7 @@ export function AchievementsSection() {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div
-                        className={`p-2.5 rounded-lg ${
+                        className={`p-2.5 rounded-lg transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 ${
                           achievement.highlight
                             ? 'bg-primary/10 text-primary'
                             : 'bg-muted text-muted-foreground'

@@ -119,7 +119,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </header>
 
         {/* Hero Image */}
-        <div className="relative aspect-video rounded-2xl overflow-hidden mb-16 border border-border shadow-xl">
+        <div className="relative aspect-video rounded-2xl overflow-hidden mb-16 border border-border shadow-xl bg-muted/30">
           <Image
             src={project.images[0]}
             alt={`${project.title} hero screenshot`}
@@ -151,7 +151,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         {/* Architecture Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold mb-6">Architecture</h2>
-          <div className="relative rounded-2xl border border-border overflow-hidden bg-card p-2 sm:p-4 shadow-lg">
+          <div className="relative rounded-2xl border border-border overflow-hidden bg-muted/30 p-2 sm:p-4 shadow-lg">
             <Image
               src={
                 project.images.find((img) => img.includes('architecture')) ||
@@ -205,10 +205,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               .filter((img) => !img.includes('architecture'))
               .slice(1)
               .map((image, index) => (
-                <div
-                  key={index}
-                  className="relative aspect-video rounded-xl overflow-hidden border border-border shadow-md group cursor-pointer"
-                >
+                  <div
+                    key={index}
+                    className="relative aspect-video rounded-xl overflow-hidden border border-border shadow-md group cursor-pointer bg-muted/30"
+                  >
                   <Image
                     src={image}
                     alt={`${project.title} screenshot ${index + 2}`}

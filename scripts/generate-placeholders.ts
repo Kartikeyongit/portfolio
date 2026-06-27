@@ -13,6 +13,9 @@ const projects = [
   'social-media',
   'voting',
   'chat',
+  'value-ai-spa',
+  'editorial-magazine',
+  'ai-agent-spa',
 ]
 
 const svgTemplate = (name: string) => `<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg">

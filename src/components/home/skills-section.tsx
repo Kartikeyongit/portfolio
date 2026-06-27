@@ -52,7 +52,7 @@ export function SkillsSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIndex * 0.1 }}
+              transition={{ duration: 0.6, delay: catIndex * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow duration-300"
             >
               <h3 className="font-semibold mb-4 text-primary">{category.title}</h3>
@@ -61,7 +61,7 @@ export function SkillsSection() {
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="text-sm py-1.5 px-3 font-normal hover:bg-primary/10 transition-colors"
+                    className="text-sm py-1.5 px-3 font-normal hover:bg-primary/10 hover:scale-105 transition-all duration-200"
                   >
                     {skill}
                   </Badge>

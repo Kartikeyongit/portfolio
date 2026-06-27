@@ -1,4 +1,4 @@
-// src/components/home/other-projects-grid.tsx
+// src/components/home/spa-projects-grid.tsx
 'use client'
 
 import { useState } from 'react'
@@ -8,11 +8,11 @@ import { AnimatedSection } from '@/components/shared/animated-section'
 import { SectionHeading } from '@/components/shared/section-heading'
 import type { OtherProject } from '@/types/project'
 
-interface OtherProjectsGridProps {
+interface SpaProjectsGridProps {
   projects: OtherProject[]
 }
 
-export function OtherProjectsGrid({ projects }: OtherProjectsGridProps) {
+export function SpaProjectsGrid({ projects }: SpaProjectsGridProps) {
   const [selectedProject, setSelectedProject] = useState<OtherProject | null>(null)
 
   return (
@@ -20,9 +20,9 @@ export function OtherProjectsGrid({ projects }: OtherProjectsGridProps) {
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <SectionHeading
-            label="More Projects"
-            title="Other things I've built."
-            description="A collection of additional projects showcasing breadth across different domains and technologies."
+            label="SPA Projects"
+            title="Single-page applications."
+            description="Standalone front-end applications with rich interactivity and modern architecture."
           />
         </AnimatedSection>
 

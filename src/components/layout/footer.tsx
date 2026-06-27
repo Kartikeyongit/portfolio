@@ -1,5 +1,5 @@
 // src/components/layout/footer.tsx
-import { Mail, Heart } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/shared/icons'
 import { SITE_CONFIG } from '@/lib/constants'
 
