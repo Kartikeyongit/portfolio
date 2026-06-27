@@ -1,8 +1,6 @@
-// src/components/shared/scroll-progress.tsx
 'use client'
 
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -15,7 +13,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 origin-left z-[100]"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 origin-left z-[100]"
     />
   )
 }

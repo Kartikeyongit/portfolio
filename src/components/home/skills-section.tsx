@@ -51,20 +51,27 @@ export function SkillsSection() {
               key={category.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: catIndex * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow duration-300"
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: catIndex * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+              className="p-6 rounded-xl border border-border bg-card hover:shadow-lg hover:border-primary/20 transition-all duration-300"
             >
               <h3 className="font-semibold mb-4 text-primary">{category.title}</h3>
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <Badge
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.span
                     key={skill}
-                    variant="secondary"
-                    className="text-sm py-1.5 px-3 font-normal hover:bg-primary/10 hover:scale-105 transition-all duration-200"
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: catIndex * 0.08 + skillIndex * 0.03 }}
                   >
-                    {skill}
-                  </Badge>
+                    <Badge
+                      variant="secondary"
+                      className="text-sm py-1.5 px-3 font-normal hover:bg-primary/10 hover:scale-105 hover:text-primary transition-all duration-200"
+                    >
+                      {skill}
+                    </Badge>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>

@@ -1,7 +1,6 @@
 // src/components/home/contact-section.tsx
 'use client'
 
-import { motion } from 'framer-motion'
 import { Mail, ArrowUpRight } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/shared/icons'
 import { Button } from '@/components/ui/button'

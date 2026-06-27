@@ -1,4 +1,3 @@
-// src/components/home/hero.tsx
 'use client'
 
 import { motion } from 'framer-motion'
@@ -16,7 +15,6 @@ const ROLES = [
   'DevOps Engineer',
   'Backend Developer',
   'Frontend Developer',
-  'System Architect',
 ]
 
 const container: Variants = {
@@ -48,8 +46,8 @@ export function Hero() {
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-20 overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-b from-primary/5 via-transparent to-transparent rounded-full blur-3xl" />
       </div>
 
@@ -66,8 +64,8 @@ export function Hero() {
         <motion.div variants={item}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/80 backdrop-blur-sm text-sm text-muted-foreground mb-8 shadow-sm">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400/50" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-rose-400/50" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500" />
             </span>
             Open to opportunities
           </div>
@@ -95,7 +93,7 @@ export function Hero() {
           variants={item}
           className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed"
         >
-          GATE CS Qualified &bull; Systems Thinker &bull; Shipping Engineer
+          GATE CS 2026 Qualified
         </motion.p>
 
         <motion.p

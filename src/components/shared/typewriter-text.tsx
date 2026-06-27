@@ -74,7 +74,7 @@ export function TypewriterText({
         className="inline-block w-[0.2em] h-[1em] ml-[2px] align-middle rounded-sm"
         style={{
           background: showCursor
-            ? 'linear-gradient(to right, #6366f1, #8b5cf6)'
+            ? 'linear-gradient(to right, #f43f5e, #ec4899)'
             : 'transparent',
           transition: 'background-color 0.1s',
         }}

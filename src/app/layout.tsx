@@ -5,9 +5,9 @@ import { GeistMono } from 'geist/font/mono'
 import { ThemeProvider } from '@/components/layout/theme-provider'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { LazyComponents } from '@/components/layout/lazy-components'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
-import { ScrollProgress } from '@/components/shared/scroll-progress'
 import { StructuredData } from '@/components/shared/structured-data'
 import { Analytics } from '@vercel/analytics/react'
 import { PageTransition } from '@/components/shared/page-transition'
@@ -86,7 +86,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
-          <ScrollProgress />
+          <LazyComponents />
         </ThemeProvider>
         <StructuredData />
         <Analytics />

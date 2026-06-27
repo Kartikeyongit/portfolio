@@ -1,9 +1,8 @@
-// src/components/projects/other-project-card.tsx
 'use client'
 
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ExternalLink, Info } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/shared/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -13,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useRef, useLayoutEffect, useEffect } from 'react'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import type { OtherProject } from '@/types/project'
 
 interface OtherProjectCardProps {
@@ -23,41 +22,19 @@ interface OtherProjectCardProps {
 }
 
 export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const controls = useAnimationControls()
-
-  useLayoutEffect(() => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    if (rect.top < window.innerHeight + 50) {
-      controls.set({ opacity: 1, y: 0 })
-    } else {
-      controls.set({ opacity: 0, y: 30 })
-    }
-  }, [controls])
-
-  useEffect(() => {
-    if (!ref.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          controls.start({ opacity: 1, y: 0 })
-          observer.disconnect()
-        }
-      },
-      { threshold: 0, rootMargin: '-50px' }
-    )
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [controls])
+  const { ref, controls } = useScrollReveal()
 
   return (
     <motion.div
       ref={ref}
-      initial={false}
+      initial={{ opacity: 0, y: 30 }}
       animate={controls}
+      onClick={onSelect}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect?.() } }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group rounded-xl border border-border bg-card/50 hover:bg-card transition-all duration-300 overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-primary/20"
+      className="group rounded-xl border border-border bg-card/50 hover:bg-card transition-all duration-300 overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 cursor-pointer"
     >
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden bg-muted/30">
@@ -68,6 +45,7 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       {/* Content */}
@@ -116,6 +94,7 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-1"
             >
               <GithubIcon className="h-3.5 w-3.5" />
@@ -128,6 +107,7 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -135,15 +115,6 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
               </a>
             </Button>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 px-2 text-xs ml-auto"
-            onClick={onSelect}
-          >
-            <Info className="h-3.5 w-3.5" />
-            Details
-          </Button>
         </div>
       </div>
     </motion.div>

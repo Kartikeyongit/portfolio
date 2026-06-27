@@ -1,4 +1,3 @@
-// src/components/shared/gradient-text.tsx
 import { cn } from '@/lib/utils'
 
 interface GradientTextProps {
@@ -10,7 +9,7 @@ export function GradientText({ children, className }: GradientTextProps) {
   return (
     <span
       className={cn(
-        'bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-violet-400 dark:to-purple-400',
+        'bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 bg-clip-text text-transparent dark:from-rose-400 dark:via-pink-400 dark:to-rose-500',
         className
       )}
     >

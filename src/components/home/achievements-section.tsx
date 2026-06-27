@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Trophy, Award, Code2, Medal, BookOpen, Users } from 'lucide-react'
+import { Trophy, Code2, Medal, BookOpen, Users } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/animated-section'
 import { SectionHeading } from '@/components/shared/section-heading'
 import { Card, CardContent } from '@/components/ui/card'

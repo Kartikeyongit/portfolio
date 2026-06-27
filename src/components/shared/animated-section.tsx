@@ -1,8 +1,7 @@
-// src/components/shared/animated-section.tsx
 'use client'
 
-import { motion, useAnimationControls } from 'framer-motion'
-import { useRef, useLayoutEffect, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -24,39 +23,13 @@ export function AnimatedSection({
   delay = 0,
   direction = 'up',
 }: AnimatedSectionProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const controls = useAnimationControls()
+  const { ref, controls } = useScrollReveal({ rootMargin: '-100px' })
   const offset = directionVariants[direction]
-
-  useLayoutEffect(() => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    if (rect.top < window.innerHeight + 100) {
-      controls.set({ opacity: 1, x: 0, y: 0 })
-    } else {
-      controls.set({ opacity: 0, ...offset })
-    }
-  }, [controls, direction, offset])
-
-  useEffect(() => {
-    if (!ref.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          controls.start({ opacity: 1, x: 0, y: 0 })
-          observer.disconnect()
-        }
-      },
-      { threshold: 0, rootMargin: '-100px' }
-    )
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [controls])
 
   return (
     <motion.div
       ref={ref}
-      initial={false}
+      initial={{ opacity: 0, ...offset }}
       animate={controls}
       transition={{
         duration: 0.6,

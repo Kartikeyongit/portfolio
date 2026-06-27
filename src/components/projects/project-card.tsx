@@ -1,7 +1,6 @@
-// src/components/projects/project-card.tsx
 'use client'
 
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -12,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useRef, useLayoutEffect, useEffect } from 'react'
+import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import type { Project } from '@/types/project'
 
 interface ProjectCardProps {
@@ -21,8 +20,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const controls = useAnimationControls()
+  const { ref, controls } = useScrollReveal()
   const allTech = [
     ...project.stack.frontend.slice(0, 2),
     ...project.stack.backend.slice(0, 2),
@@ -34,35 +32,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     project.stack.database.length -
     allTech.length
 
-  useLayoutEffect(() => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    if (rect.top < window.innerHeight + 50) {
-      controls.set({ opacity: 1, y: 0 })
-    } else {
-      controls.set({ opacity: 0, y: 40 })
-    }
-  }, [controls])
-
-  useEffect(() => {
-    if (!ref.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          controls.start({ opacity: 1, y: 0 })
-          observer.disconnect()
-        }
-      },
-      { threshold: 0, rootMargin: '-50px' }
-    )
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [controls])
-
   return (
     <motion.div
       ref={ref}
-      initial={false}
+      initial={{ opacity: 0, y: 40 }}
       animate={controls}
       transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
     >
@@ -77,14 +50,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             {/* Status badge */}
             <div className="absolute top-3 right-3">
               <span
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium backdrop-blur-sm border shadow-sm ${
                   project.status === 'production'
-                    ? 'bg-green-500/15 border-green-500/30 text-green-600 dark:text-green-400'
+                    ? 'bg-rose-500/15 border-rose-500/30 text-rose-600 dark:text-rose-400'
                     : project.status === 'development'
-                      ? 'bg-yellow-500/15 border-yellow-500/30 text-yellow-600 dark:text-yellow-400'
+                      ? 'bg-amber-500/15 border-amber-500/30 text-amber-600 dark:text-amber-400'
                       : 'bg-muted/50 border-border text-muted-foreground'
                 }`}
               >

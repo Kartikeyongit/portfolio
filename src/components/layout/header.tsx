@@ -1,7 +1,6 @@
-// src/components/layout/header.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Menu, Moon, Sun } from 'lucide-react'
@@ -14,10 +13,9 @@ import { cn } from '@/lib/utils'
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false)
 
   useEffect(() => {
-    setMounted(true)
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -39,6 +37,7 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
+          aria-current="page"
           className="text-lg font-bold tracking-tight hover:text-primary transition-colors"
         >
           {SITE_CONFIG.name.split(' ')[0]}
@@ -74,7 +73,7 @@ export function Header() {
             </Button>
           )}
 
-          {/* Mobile Menu — Fixed: No Button wrapper inside SheetTrigger */}
+          {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
               <button
