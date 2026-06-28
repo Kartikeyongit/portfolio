@@ -16,12 +16,12 @@ const achievements = [
   },
   {
     icon: Medal,
-    title: 'Inter-Branch Volleyball Champion',
+    title: 'NIET Inter-Branch Volleyball Champion',
     description: '1st Position in College Competition (2023 & 2024)',
   },
   {
     icon: Medal,
-    title: 'District Level Cricket',
+    title: 'Kendriya Vidyalaya District Level Cricket',
     description: '3rd Position in District Competition',
   },
   {
