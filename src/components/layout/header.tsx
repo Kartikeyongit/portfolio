@@ -51,7 +51,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-accent"
+              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </a>
@@ -91,7 +91,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-lg font-medium px-4 py-2 rounded-lg hover:bg-accent transition-colors"
+                    className="text-lg font-medium px-4 py-2 transition-colors"
                   >
                     {link.label}
                   </a>
