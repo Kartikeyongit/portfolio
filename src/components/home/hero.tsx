@@ -112,7 +112,7 @@ export function Hero() {
           <Button size="lg" className="rounded-xl shadow-lg shadow-primary/25" asChild>
             <a href="#featured-work" onClick={(e) => scrollToSection(e, '#featured-work')}>
               View My Work
-              <ArrowDown className="ml-2 h-4 w-4" />
+              <ArrowDown className="h-4 w-4" />
             </a>
           </Button>
           <Button size="lg" variant="outline" className="rounded-xl" asChild>

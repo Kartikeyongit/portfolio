@@ -65,7 +65,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-lg"
+              className="rounded-full"
               aria-label="Toggle theme"
             >
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -78,7 +78,7 @@ export function Header() {
             <SheetTrigger asChild className="md:hidden">
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-lg p-2 hover:bg-accent transition-colors"
+                className="inline-flex items-center justify-center rounded-full p-2 hover:bg-accent transition-colors"
                 aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" />
