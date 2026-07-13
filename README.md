@@ -8,7 +8,7 @@
 
 > A modern, production-grade portfolio showcasing full-stack engineering projects — built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.
 
-🔗 **Live:** [portfolio](https://portfolio-kappa-seven-65.vercel.app/)
+🔗 **Live:** [portfolio](https://kartikey-gautam-portfolio.vercel.app/)
 
 ---
 
