@@ -80,6 +80,11 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+  [data-lenis-prevent] {
     scroll-behavior: auto !important;
   }
 }
@@ -94,7 +99,16 @@
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+  }
+  html.lenis {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
 }
 

@@ -14,9 +14,13 @@ export function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, href: st
   e.preventDefault()
   const element = document.querySelector(href)
   if (element) {
-    const offset = 80
-    const top = element.getBoundingClientRect().top + window.pageYOffset - offset
-    window.scrollTo({ top, behavior: 'smooth' })
+    const lenis = (window as any).lenis
+    if (lenis) {
+      lenis.scrollTo(element, { offset: 80 })
+    } else {
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/layout/theme-provider'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { LazyComponents } from '@/components/layout/lazy-components'
+import { SmoothScrollProvider } from '@/components/layout/smooth-scroll-provider'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import { StructuredData } from '@/components/shared/structured-data'
@@ -79,14 +80,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex flex-col min-h-screen">
-            <Header />
-            <main id="main-content" className="flex-1">
-              <PageTransition>{children}</PageTransition>
-            </main>
-            <Footer />
-          </div>
-          <LazyComponents />
+          <SmoothScrollProvider>
+            <div className="relative flex flex-col min-h-screen">
+              <Header />
+              <main id="main-content" className="flex-1">
+                <PageTransition>{children}</PageTransition>
+              </main>
+              <Footer />
+            </div>
+            <LazyComponents />
+          </SmoothScrollProvider>
         </ThemeProvider>
         <StructuredData />
         <Analytics />
