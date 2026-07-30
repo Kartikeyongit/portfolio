@@ -1,5 +1,6 @@
 'use client'
 
+import { useTiltEffect } from '@/hooks/use-tilt-effect'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -17,7 +18,8 @@ interface ProjectCardProps {
   index: number
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
+  const { ref, glareRef, handleMouseMove, handleMouseEnter, handleMouseLeave } = useTiltEffect()
   const allTech = [
     ...project.stack.frontend.slice(0, 2),
     ...project.stack.backend.slice(0, 2),
@@ -30,9 +32,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     allTech.length
 
   return (
-    <div>
-      <Link href={project.caseStudyUrl} className="group block h-full">
-        <div className="relative h-full rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 flex flex-col">
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="group"
+    >
+      <Link href={project.caseStudyUrl} className="block h-full">
+        <div className="relative h-full rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 flex flex-col">
           {/* Image */}
           <div className="relative aspect-video overflow-hidden bg-muted/30">
             <Image
@@ -125,6 +133,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </div>
       </Link>
+      <div
+        ref={glareRef}
+        className="absolute inset-0 rounded-xl pointer-events-none z-10"
+        style={{ background: 'transparent' }}
+      />
     </div>
   )
 }

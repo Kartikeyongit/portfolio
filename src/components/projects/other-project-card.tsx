@@ -1,5 +1,6 @@
 'use client'
 
+import { useTiltEffect } from '@/hooks/use-tilt-effect'
 import Image from 'next/image'
 import { ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/shared/icons'
@@ -19,14 +20,19 @@ interface OtherProjectCardProps {
   onSelect?: () => void
 }
 
-export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardProps) {
+export function OtherProjectCard({ project, onSelect }: OtherProjectCardProps) {
+  const { ref, glareRef, handleMouseMove, handleMouseEnter, handleMouseLeave } = useTiltEffect()
   return (
     <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onClick={onSelect}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect?.() } }}
-      className="group rounded-xl border border-border bg-card/50 hover:bg-card transition-all duration-300 overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 cursor-pointer"
+      className="group rounded-xl border border-border bg-card/50 hover:bg-card transition-all duration-300 overflow-hidden hover:shadow-lg hover:border-primary/20 cursor-pointer"
     >
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden bg-muted/30">
@@ -109,6 +115,11 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
           )}
         </div>
       </div>
+      <div
+        ref={glareRef}
+        className="absolute inset-0 rounded-xl pointer-events-none z-10"
+        style={{ background: 'transparent' }}
+      />
     </div>
   )
 }
