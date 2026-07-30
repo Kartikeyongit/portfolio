@@ -1,10 +1,20 @@
 'use client'
 
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+
+  useEffect(() => {
+    const lenis = (window as any).lenis
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname])
 
   return (
     <motion.div
