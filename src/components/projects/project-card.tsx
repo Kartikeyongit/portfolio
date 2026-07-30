@@ -11,7 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import type { Project } from '@/types/project'
 
 interface ProjectCardProps {
@@ -20,7 +19,6 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const { ref, controls } = useScrollReveal()
   const allTech = [
     ...project.stack.frontend.slice(0, 2),
     ...project.stack.backend.slice(0, 2),
@@ -34,9 +32,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 40 }}
-      animate={controls}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <Link href={project.caseStudyUrl} className="group block h-full">
