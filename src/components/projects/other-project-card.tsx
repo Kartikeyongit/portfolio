@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { useTiltEffect } from '@/hooks/use-tilt-effect'
 import Image from 'next/image'
 import { ExternalLink } from 'lucide-react'
@@ -20,11 +21,15 @@ interface OtherProjectCardProps {
   onSelect?: () => void
 }
 
-export function OtherProjectCard({ project, onSelect }: OtherProjectCardProps) {
+export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardProps) {
   const { ref, glareRef, handleMouseMove, handleMouseEnter, handleMouseLeave } = useTiltEffect()
   return (
-    <div
+    <motion.div
       ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -120,6 +125,6 @@ export function OtherProjectCard({ project, onSelect }: OtherProjectCardProps) {
         className="absolute inset-0 rounded-xl pointer-events-none z-10"
         style={{ background: 'transparent' }}
       />
-    </div>
+    </motion.div>
   )
 }
