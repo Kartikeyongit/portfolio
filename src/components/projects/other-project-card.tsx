@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/shared/icons'
@@ -12,7 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import type { OtherProject } from '@/types/project'
 
 interface OtherProjectCardProps {
@@ -22,18 +20,12 @@ interface OtherProjectCardProps {
 }
 
 export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardProps) {
-  const { ref, controls } = useScrollReveal()
-
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={controls}
+    <div
       onClick={onSelect}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect?.() } }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
       className="group rounded-xl border border-border bg-card/50 hover:bg-card transition-all duration-300 overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 cursor-pointer"
     >
       {/* Thumbnail */}
@@ -117,6 +109,6 @@ export function OtherProjectCard({ project, index, onSelect }: OtherProjectCardP
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }

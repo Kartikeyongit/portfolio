@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -31,12 +30,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     allTech.length
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-    >
+    <div>
       <Link href={project.caseStudyUrl} className="group block h-full">
         <div className="relative h-full rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 flex flex-col">
           {/* Image */}
@@ -131,6 +125,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </div>
       </Link>
-    </motion.div>
+    </div>
   )
 }
